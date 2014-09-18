@@ -2,7 +2,7 @@ var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, creat
 var cow;
 var bg;
 var tractor;
-var birds;
+var birds =[];
 var lift;
 var tree;
 var train;

@@ -2,7 +2,7 @@ var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, creat
 var cow;
 var bg;
 var tractor;
-var bird;
+var birds;
 var lift;
 var tree;
 var train;
@@ -12,7 +12,7 @@ var house01;
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png', 100/*width*/,50/*height*/);
 	game.load.spritesheet('tractor', 'assets/tractor.png', 82/*width*/,110/*height*/);
-	game.load.spritesheet('bird', 'assets/bird01.png', 86/*width*/,109/*height*/);
+	game.load.spritesheet('birds', 'assets/bird01.png', 86/*width*/,109/*height*/);
 	game.load.spritesheet('lift', 'assets/lift.png', 56/*width*/,40/*height*/);
 	game.load.spritesheet('tree', 'assets/tree01.png', 184/*width*/,159/*height*/);
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
@@ -54,9 +54,21 @@ function create() {
 */
 //////////////////////////////////////////////////////////
 
-	bird = game.add.sprite(790,1330, 'bird');
-	bird.animations.add('fly');
-	bird.animations.play('fly', 10/*속도조절*/, true);
+	birds[0] = game.add.sprite(790,1330, 'bird');
+	birds[0].animations.add('fly');
+	birds[0].animations.play('fly', 10/*속도조절*/, true);
+	//bird.inputEnabled = true;
+	//bird.events.onInputDown.add(birdClick, this);
+
+	birds[1] = game.add.sprite(790,1330, 'bird');
+	birds[1].animations.add('fly');
+	birds[1].animations.play('fly', 10/*속도조절*/, true);
+	//bird.inputEnabled = true;
+	//bird.events.onInputDown.add(birdClick, this);
+
+	birds[2] = game.add.sprite(790,1330, 'bird');
+	birds[2].animations.add('fly');
+	birds[2].animations.play('fly', 10/*속도조절*/, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 

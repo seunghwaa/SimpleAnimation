@@ -2,7 +2,7 @@ var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, creat
 var cow;
 var bg;
 var tractor;
-var birds =[];
+var birds = [];
 var lift;
 var tree;
 var train;
@@ -12,7 +12,7 @@ var house01;
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png', 100/*width*/,50/*height*/);
 	game.load.spritesheet('tractor', 'assets/tractor.png', 82/*width*/,110/*height*/);
-	game.load.spritesheet('birds', 'assets/bird01.png', 86/*width*/,109/*height*/);
+	game.load.spritesheet('bird', 'assets/bird01.png', 86/*width*/,109/*height*/);
 	game.load.spritesheet('lift', 'assets/lift.png', 56/*width*/,40/*height*/);
 	game.load.spritesheet('tree', 'assets/tree01.png', 184/*width*/,159/*height*/);
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
@@ -34,11 +34,27 @@ function create() {
 
 	house02= game.add.sprite(2472,921, 'house02');
 
-	cow = game.add.sprite(600, 1000, 'cow');
-	cow.animations.add('walk');
+
+	/*cows = game.add.sprite(800, 1020, 'cow');
+	cows.animations.add('walk');
+	cows.inputEnabled = true;
+	cows.events.onInputDown.add(cowClick, this);
+	//cow.animations.play('walk', 10/*속도조절, true); 항상 움직임*/
+ 
+
+//////////////
+	cow = game.add.sprite(800, 1020, 'cow');
+	cow.animations.add('walk', [0, 1, 2], 6, true, true);
+	cow.walkAnim = cow.animations.add('walk2');
+	var walkCompleted = function() {
+	    cow.animations.play('walk');
+	}
+	cow.walkAnim.onComplete.add(walkCompleted, this);
 	cow.inputEnabled = true;
 	cow.events.onInputDown.add(cowClick, this);
-	//cow.animations.play('walk', 10/*속도조절*/, true); 항상 움직임	
+	cow.animations.play('walk');
+	
+	
 
 ////////////////////////////////////////////////////////
 
@@ -54,23 +70,25 @@ function create() {
 */
 //////////////////////////////////////////////////////////
 
-	birds[0] = game.add.sprite(790,1330, 'birds');
+	birds[0] = game.add.sprite(790,1330, 'bird');
 	birds[0].animations.add('fly');
 	birds[0].animations.play('fly', 10/*속도조절*/, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
-	birds[1] = game.add.sprite(900,1000, 'birds');
+	birds[1] = game.add.sprite(900,1000, 'bird');
 	birds[1].animations.add('fly');
 	birds[1].animations.play('fly', 10/*속도조절*/, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
 
-	birds[2] = game.add.sprite(400,1500, 'birds');
+	birds[2] = game.add.sprite(400,1500, 'bird');
 	birds[2].animations.add('fly');
 	birds[2].animations.play('fly', 10/*속도조절*/, true);
 	//bird.inputEnabled = true;
 	//bird.events.onInputDown.add(birdClick, this);
+
+
 
 
 	lift = game.add.sprite(2400, 180, 'lift');
@@ -79,23 +97,69 @@ function create() {
 	lift.events.onInputDown.add(liftClick, this);
 
 
-	tree = game.add.sprite(300, 1050, 'tree');
+	/*tree = game.add.sprite(300, 1050, 'tree');
 	tree.animations.add('cut');
 	tree.inputEnabled = true;
 	tree.events.onInputDown.add(treeClick, this);
+*/
+
+////////////
+	tree = game.add.sprite(300, 1050, 'tree');
+	tree.animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
+	tree.cutAnim = tree.animations.add('cut');
+	var cutCompleted = function() {
+	    tree.animations.play('swing');
+	}
+	tree.cutAnim.onComplete.add(cutCompleted, this);
+	tree.inputEnabled = true;
+	tree.events.onInputDown.add(treeClick, this);
+	tree.animations.play('swing');
+
+
+//////////////////
+	/*trees[1] = game.add.sprite(500, 1000, 'tree');
+	trees[1].animations.add('swing', [0, 1, 2, 3, 4, 5, 6, 7], 12, true, true);
+	trees[1].cutAnim = trees.animations.add('cut');
+	 var cutCompleted = function() {
+	     trees.animations.play('swing');
+	 }
+	trees[1].cutAnim.onComplete.add(cutCompleted, this);
+	trees[1].inputEnabled = true;
+	trees[1].events.onInputDown.add(treesClick, this);
+	trees[1].animations.play('swing');
+*/
+////////////////////
 
 	train = game.add.sprite(3000, 440, 'train');
 	train.animations.add('shiny');
 	train.inputEnabled = true;
 	train.events.onInputDown.add(trainClick, this);
 
+
+	/*birds[0].wander = game.add.tween(birds[0])
+        .to({ x: 890, y: 1380 }, 2000, Phaser.Easing.Linear.None)
+        .to({ x: 790, y: 1330 }, 2000, Phaser.Easing.Linear.None)
+        .loop()
+        .start(); 
+
+	birds[0].wander = game.add.tween(birds[0])
+        .to({ x: 890, y: 1380 }, 2000, Phaser.Easing.Linear.None)
+        .to({ x: 790, y: 1330 }, 2000, Phaser.Easing.Linear.None)
+        .loop();
+*/
+
+	birds[0].wander = game.add.tween(birds[0])
+		.to({ x: 890, y: 1380 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 790, y: 1330 }, 2000, Phaser.Easing.Linear.None);
 }
 
 
 
 
 function cowClick() {
-	cow.animations.play('walk', 10, false);
+	cow.animations.play('walk2', 10, false);
+	
+	birds[0].wander.start();
 	
 }
 

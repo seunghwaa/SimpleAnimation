@@ -1,4 +1,4 @@
-var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, create: create, update: update });
+var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, create: create, /*update: update */});
 var cow;
 var bg;
 var tractor;
@@ -41,17 +41,17 @@ function create() {
 	//cow.animations.play('walk', 10/*속도조절*/, true); 항상 움직임	
 
 ////////////////////////////////////////////////////////
-/*
+
 
 	tractor = game.add.sprite(1000, 1050, 'tractor');
 	tractor.animations.add('walk');
 	tractor.inputEnabled = true;
 	tractor.events.onInputDown.add(tractorClick, this);
-*/	
+/*	
 	tractor = game.add.sprite(1000, 1050, 'tractor');
 	tractor.animations.add('run');
 	tractor.animations.play('run', 7, true);
-
+*/
 //////////////////////////////////////////////////////////
 
 	bird = game.add.sprite(790,1330, 'bird');
@@ -105,7 +105,7 @@ function tractorClick(){
 		tractor.x =game.bg.width;
 	};
 }
-*/
+
 
 function update() {
 	tractor.x-=2;
@@ -117,7 +117,7 @@ function update() {
 	};
 
 }
-
+*/
 /////////////////////////////////
 
 

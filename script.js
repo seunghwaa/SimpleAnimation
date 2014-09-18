@@ -1,4 +1,13 @@
-var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, create: create, update: update });
+var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, create: create, /*update: update*/ });
+var cow;
+var bg;
+var tractor;
+var bird;
+var lift;
+var tree;
+var train;
+var house01;
+
 
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png', 100/*width*/,50/*height*/);
@@ -6,25 +15,24 @@ function preload() {
 	game.load.spritesheet('bird', 'assets/bird01.png', 86/*width*/,109/*height*/);
 	game.load.spritesheet('lift', 'assets/lift.png', 56/*width*/,40/*height*/);
 	game.load.spritesheet('tree', 'assets/tree01.png', 184/*width*/,159/*height*/);
+	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
+	game.load.image('house01', 'assets/house01.png');
+	game.load.image('house02', 'assets/house02.png');
 	game.load.image('bg', 'assets/map.jpg');
+
 	//game.load.atlas('seacreatures', 'seacreatures_json.png', 'seacreatures_json.json'); ???
 	//나무를 spritesheet로 만들면... 겹쳐지는 부분은 어떻게 함??
 
 }
 
 
-var cow;
-var bg;
-var tractor;
-var bird;
-var lift;
-var tree;
-
-
-
 function create() {
 	
 	bg= game.add.sprite(0,0, 'bg');
+
+	house01= game.add.sprite(1323,999, 'house01');
+
+	house02= game.add.sprite(2472,921, 'house02');
 
 	cow = game.add.sprite(600, 1000, 'cow');
 	cow.animations.add('walk');
@@ -33,17 +41,17 @@ function create() {
 	//cow.animations.play('walk', 10/*속도조절*/, true); 항상 움직임	
 
 ////////////////////////////////////////////////////////
-/*
+
 	tractor = game.add.sprite(1000, 1050, 'tractor');
 	tractor.animations.add('walk');
 	tractor.inputEnabled = true;
 	tractor.events.onInputDown.add(tractorClick, this);
-*/	
-
+	
+/*
 	tractor = game.add.sprite(1000, 1050, 'tractor');
 	tractor.animations.add('run');
 	tractor.animations.play('run', 7, true);
-
+*/
 //////////////////////////////////////////////////////////
 
 	bird = game.add.sprite(790,1330, 'bird');
@@ -59,10 +67,15 @@ function create() {
 	lift.events.onInputDown.add(liftClick, this);
 
 
-	tree = game.add.sprite(400, 1050, 'tree');
+	tree = game.add.sprite(300, 1050, 'tree');
 	tree.animations.add('cut');
 	tree.inputEnabled = true;
 	tree.events.onInputDown.add(treeClick, this);
+
+	train = game.add.sprite(3000, 440, 'train');
+	train.animations.add('shiny');
+	train.inputEnabled = true;
+	train.events.onInputDown.add(trainClick, this);
 
 }
 
@@ -92,7 +105,7 @@ function tractorClick(){
 		tractor.x =game.bg.width;
 	};
 }
-*/
+
 
 function update() {
 	tractor.x-=2;
@@ -104,6 +117,7 @@ function update() {
 	};
 
 }
+*/
 /////////////////////////////////
 
 
@@ -114,6 +128,11 @@ function liftClick() {
 
 function treeClick() {
 	tree.animations.play('cut', 16, false);
+
+}
+
+function trainClick() {
+	train.animations.play('shiny', 8, false);
 
 }
 

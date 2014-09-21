@@ -18,7 +18,7 @@ function preload() {
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
 	game.load.image('house01', 'assets/house01.png');
 	game.load.image('house02', 'assets/house02.png');
-	game.load.image('bg', 'assets/map.jpg');
+	game.load.image('bg', 'assets/bg.jpg');
 
 	//game.load.atlas('seacreatures', 'seacreatures_json.png', 'seacreatures_json.json'); ???
 	//나무를 spritesheet로 만들면... 겹쳐지는 부분은 어떻게 함??
@@ -44,7 +44,7 @@ function create() {
 
 //////////////
 	cow = game.add.sprite(800, 1020, 'cow');
-	cow.animations.add('walk', [0, 1, 2], 6, true, true);
+	cow.animations.add('walk', [0, 1, 2], 6/*속도*/, true, true);
 	cow.walkAnim = cow.animations.add('walk2');
 	var walkCompleted = function() {
 	    cow.animations.play('walk');
@@ -58,16 +58,29 @@ function create() {
 
 ////////////////////////////////////////////////////////
 
-
+/*
 	tractor = game.add.sprite(1000, 1050, 'tractor');
 	tractor.animations.add('walk');
 	tractor.inputEnabled = true;
 	tractor.events.onInputDown.add(tractorClick, this);
+tractor클릭하면 움직이기
+*/
 /*	
 	tractor = game.add.sprite(1000, 1050, 'tractor');
 	tractor.animations.add('run');
 	tractor.animations.play('run', 7, true);
 */
+
+	tractor = game.add.sprite(900, 1080, 'tractor');
+	tractor.animations.add('move', [0, 1, 2, 3, 4, 5, 6], 11/*속도*/, true, true);
+	tractor.moveAnim = tractor.animations.add('move2');
+	var moveCompleted = function() {
+	    tractor.animations.play('move');
+	}
+	tractor.moveAnim.onComplete.add(moveCompleted, this);
+	tractor.inputEnabled = true;
+	tractor.events.onInputDown.add(tractorClick, this);
+	tractor.animations.play('move');
 //////////////////////////////////////////////////////////
 
 	birds[0] = game.add.sprite(790,1330, 'bird');
@@ -151,7 +164,16 @@ function create() {
 	birds[0].wander = game.add.tween(birds[0])
 		.to({ x: 890, y: 1380 }, 2000, Phaser.Easing.Linear.None)
 		.to({ x: 790, y: 1330 }, 2000, Phaser.Easing.Linear.None);
+
+
+	tractor.wander = game.add.tween(tractor)
+		.to({ x: 1200, y: 1080 }, 2000, Phaser.Easing.Linear.None)
+		.to({ x: 900, y: 1080 }, 2000, Phaser.Easing.Linear.None);
+
+
 }
+
+
 
 
 
@@ -159,15 +181,16 @@ function create() {
 function cowClick() {
 	cow.animations.play('walk2', 10, false);
 	
-	birds[0].wander.start();
+	birds[0].wander.start(); //소를 클릭하면 새가 움직임
 	
 }
 
 ////////////////////////////////////////////////
 
 function tractorClick() {
-	tractor.animations.play('walk', 7, false);
+	tractor.animations.play('move2', 13, false);
 
+	tractor.wander.start();
 }
 
 /*

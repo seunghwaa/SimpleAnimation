@@ -1,12 +1,14 @@
 var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, create: create, /*update: update */});
 var cow;
-var bg;
+var bg01;
+var bg02;
 var tractor;
 var birds = [];
 var lift;
 var tree;
 var train;
 var house01;
+var crane;
 
 
 function preload() {
@@ -16,9 +18,13 @@ function preload() {
 	game.load.spritesheet('lift', 'assets/lift.png', 56/*width*/,40/*height*/);
 	game.load.spritesheet('tree', 'assets/tree01.png', 184/*width*/,159/*height*/);
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
+
+	game.load.spritesheet('crane', 'assets/crane.png', 309/*width*/,318/*height*/);
+
 	game.load.image('house01', 'assets/house01.png');
 	game.load.image('house02', 'assets/house02.png');
-	game.load.image('bg', 'assets/bg.jpg');
+	game.load.image('bg02', 'assets/bg02.png');
+	game.load.image('bg01', 'assets/bg01.png');
 
 	//game.load.atlas('seacreatures', 'seacreatures_json.png', 'seacreatures_json.json'); ???
 	//나무를 spritesheet로 만들면... 겹쳐지는 부분은 어떻게 함??
@@ -28,7 +34,8 @@ function preload() {
 
 function create() {
 	
-	bg= game.add.sprite(0,0, 'bg');
+	bg01= game.add.sprite(0,0, 'bg01');
+	bg02= game.add.sprite(0,0, 'bg02');
 
 	house01= game.add.sprite(1323,999, 'house01');
 
@@ -171,6 +178,21 @@ tractor클릭하면 움직이기
 		.to({ x: 900, y: 1080 }, 2000, Phaser.Easing.Linear.None);
 
 
+
+////////////////////////////////////////////////////
+
+
+	crane = game.add.sprite(700, 1080, 'crane');
+	crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
+	crane.movingAnim = crane.animations.add('moving2');
+	var movingCompleted = function() {
+	    crane.animations.play('moving');
+	}
+	crane.movingAnim.onComplete.add(movingCompleted, this);
+	crane.inputEnabled = true;
+	crane.events.onInputDown.add(craneClick, this);
+	crane.animations.play('moving');
+
 }
 
 
@@ -235,6 +257,11 @@ function trainClick() {
 
 }
 
+function craneClick() {
+	crane.animations.play('moving2', 10, false);
+
+	//crane.wander.start();
+}
 
 
 

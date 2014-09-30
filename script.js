@@ -21,11 +21,12 @@ function preload() {
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
 
 	game.load.spritesheet('crane', 'assets/crane.png', 309/*width*/,318/*height*/);
-	game.load.spritesheet('sea', 'assets/sea.png',3840/*width*/,670/*height*/);
+	
 
 	game.load.image('house01', 'assets/house01.png');
 	game.load.image('house02', 'assets/house02.png');
 	game.load.image('bg02', 'assets/bg02.png');
+	game.load.spritesheet('sea', 'assets/sea.png',3840/*width*/,670/*height*/);
 	game.load.image('bg01', 'assets/bg01.png');
 
 
@@ -38,6 +39,11 @@ function preload() {
 function create() {
 	
 	bg01= game.add.sprite(0,0, 'bg01');
+
+	sea = game.add.sprite(0,1491, 'sea');
+	sea.animations.add('searun');
+	sea.animations.play('searun', 7, true);
+
 	bg02= game.add.sprite(0,0, 'bg02');
 
 	house01= game.add.sprite(1323,999, 'house01');
@@ -196,11 +202,6 @@ tractor클릭하면 움직이기
 	crane.events.onInputDown.add(craneClick, this);
 	crane.animations.play('moving');
 
-
-
-	sea = game.add.sprite(0, 0, 'sea');
-	sea.animations.add('searun');
-	sea.animations.play('searun', 7, true);
 
 }
 

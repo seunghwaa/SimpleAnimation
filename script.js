@@ -9,6 +9,7 @@ var tree;
 var train;
 var house01;
 var crane;
+var sea;
 
 
 function preload() {
@@ -20,11 +21,13 @@ function preload() {
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
 
 	game.load.spritesheet('crane', 'assets/crane.png', 309/*width*/,318/*height*/);
+	game.load.spritesheet('sea', 'assets/sea.png',3840/*width*/,670/*height*/);
 
 	game.load.image('house01', 'assets/house01.png');
 	game.load.image('house02', 'assets/house02.png');
 	game.load.image('bg02', 'assets/bg02.png');
 	game.load.image('bg01', 'assets/bg01.png');
+
 
 	//game.load.atlas('seacreatures', 'seacreatures_json.png', 'seacreatures_json.json'); ???
 	//나무를 spritesheet로 만들면... 겹쳐지는 부분은 어떻게 함??
@@ -192,6 +195,12 @@ tractor클릭하면 움직이기
 	crane.inputEnabled = true;
 	crane.events.onInputDown.add(craneClick, this);
 	crane.animations.play('moving');
+
+
+
+	sea = game.add.sprite(0, 0, 'sea');
+	sea.animations.add('searun');
+	sea.animations.play('searun', 7, true);
 
 }
 

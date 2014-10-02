@@ -10,6 +10,7 @@ var train;
 var house01;
 var crane;
 var sea;
+var cowEmitter;
 
 
 function preload() {
@@ -59,8 +60,9 @@ function create() {
  
 
 //////////////
+	/*
 	cow = game.add.sprite(800, 1020, 'cow');
-	cow.animations.add('walk', [0, 1, 2], 6/*속도*/, true, true);
+	cow.animations.add('walk', [0, 1, 2], 6, true, true);
 	cow.walkAnim = cow.animations.add('walk2');
 	var walkCompleted = function() {
 	    cow.animations.play('walk');
@@ -69,7 +71,23 @@ function create() {
 	cow.inputEnabled = true;
 	cow.events.onInputDown.add(cowClick, this);
 	cow.animations.play('walk');
-	
+	*/
+
+
+	cow.animations.add('walk', [0, 1, 2, 1, 0]);
+    cow.animations.add('growl', [3, 4, 5, 6]);
+
+	 var cowClick = function() {
+        var clickComplete = function() {
+            cow.animations.play('growl', 5, true);
+        }
+        cow.animations.play('walk', 5, false).complete = clickComplete;
+    }
+
+    cow.inputEnabled = true;
+    cow.events.onInputDown.add(cowClick, this);
+
+    cow.animations.play('growl', 5, true);
 	
 
 ////////////////////////////////////////////////////////
@@ -203,11 +221,35 @@ tractor클릭하면 움직이기
 	crane.animations.play('moving');
 
 
+
+
+
+
+	cowEmitter = game.add.emitter(700, 800); // x, y 좌표
+	cowEmitter.makeParticles('cow');
+	 
+	
+	
+	
+	
+
+	game.input.onDown.add(cowBurst, this); //
+
+	
+
 }
 
 
 
+function cowBurst(mouse) {
+	cowEmitter.x = mouse.x;
+	cowEmitter.y = mouse.y;
 
+	//console.log("cow");
+  	cowEmitter.start(false, 2000, 10, 10);// 폭발(t/f), 수명(ms), 주기(ms), 갯수
+  	cowEmitter.gravity=1000;//중력 조절
+  
+}
 
 
 function cowClick() {
@@ -274,11 +316,6 @@ function craneClick() {
 }
 
 
-
-
-
-
-
-
+  
 
 

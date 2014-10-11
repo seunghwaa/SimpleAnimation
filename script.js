@@ -2,6 +2,7 @@ var game = new Phaser.Game(3840, 2160, Phaser.AUTO, '', {preload: preload, creat
 var cow;
 var bg01;
 var bg02;
+var bg03;
 var tractor;
 var birds = [];
 var lift;
@@ -10,7 +11,8 @@ var train;
 var house01;
 var crane;
 var sea;
-
+var village01;
+var farm;
 
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png', 100/*width*/,50/*height*/);
@@ -21,10 +23,12 @@ function preload() {
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
 
 	game.load.spritesheet('crane', 'assets/crane.png', 309/*width*/,318/*height*/);
-	
+	game.load.spritesheet('village01', 'assets/village01.png', 371/*width*/,422/*height*/);
 
 	game.load.image('house01', 'assets/house01.png');
-	game.load.image('house02', 'assets/house02.png');
+	//game.load.image('house02', 'assets/house02.png');
+	game.load.image('farm', 'assets/farm.png');
+	game.load.image('bg03', 'assets/construction_site.png');
 	game.load.image('bg02', 'assets/bg02.png');
 	game.load.spritesheet('sea', 'assets/sea.png',3840/*width*/,670/*height*/);
 	game.load.image('bg01', 'assets/bg01.png');
@@ -43,12 +47,13 @@ function create() {
 	sea = game.add.sprite(0,1491, 'sea');
 	sea.animations.add('searun');
 	sea.animations.play('searun', 7, true);
-
+	bg03= game.add.sprite(798,432, 'bg03');
+	farm= game.add.sprite(738,1041, 'farm');
 	bg02= game.add.sprite(0,0, 'bg02');
 
 	house01= game.add.sprite(1323,999, 'house01');
 
-	house02= game.add.sprite(2472,921, 'house02');
+	//house02= game.add.sprite(2472,921, 'house02');
 
 
 	/*cows = game.add.sprite(800, 1020, 'cow');
@@ -191,7 +196,7 @@ tractor클릭하면 움직이기
 ////////////////////////////////////////////////////
 
 
-	crane = game.add.sprite(700, 1080, 'crane');
+	crane = game.add.sprite(1261, 539, 'crane');
 	crane.animations.add('moving', [0, 1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16], 10/*속도*/, true, true);
 	crane.movingAnim = crane.animations.add('moving2');
 	var movingCompleted = function() {
@@ -203,6 +208,18 @@ tractor클릭하면 움직이기
 	crane.animations.play('moving');
 
 
+	
+	
+	village01 = game.add.sprite(2472,921, 'village01');
+	village01.animations.add('move_1', [0, 1], 3/*속도*/, true, true);
+	village01.moveAnim = village01.animations.add('move_2');
+	var move_1Completed = function() {
+	    village01.animations.play('move_1');
+	}
+	village01.moveAnim.onComplete.add(move_1Completed, this);
+	village01.inputEnabled = true;
+	village01.events.onInputDown.add(village01Click, this);
+	village01.animations.play('move_1');
 }
 
 
@@ -275,6 +292,11 @@ function craneClick() {
 
 
 
+
+function village01Click() {
+	village01.animations.play('move_2', 22, false);
+
+}
 
 
 

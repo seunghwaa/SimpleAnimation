@@ -14,8 +14,8 @@ var sea;
 
 var village01;
 var farm;
-
-var cowEmitter;
+var snow;
+var snowEmitter;
 
 
 
@@ -26,6 +26,7 @@ function preload() {
 	game.load.spritesheet('lift', 'assets/lift.png', 56/*width*/,40/*height*/);
 	game.load.spritesheet('tree', 'assets/tree01.png', 184/*width*/,159/*height*/);
 	game.load.spritesheet('train', 'assets/train.png', 551/*width*/,72/*height*/);
+	game.load.spritesheet('snow', 'assets/snow.png', 8/*width*/,8/*height*/);
 
 	game.load.spritesheet('crane', 'assets/crane.png', 309/*width*/,318/*height*/);
 	game.load.spritesheet('village01', 'assets/village01.png', 371/*width*/,422/*height*/);
@@ -248,8 +249,8 @@ tractor클릭하면 움직이기
 
 
 
-	cowEmitter = game.add.emitter(700, 800); // x, y 좌표
-	cowEmitter.makeParticles('cow');
+	snowEmitter = game.add.emitter(700, 800); // x, y 좌표
+	snowEmitter.makeParticles('snow');
 	 
 	
 	
@@ -266,12 +267,12 @@ tractor클릭하면 움직이기
 
 
 function cowBurst(mouse) {
-	cowEmitter.x = mouse.x;
-	cowEmitter.y = mouse.y;
+	snowEmitter.x = mouse.x;
+	snowEmitter.y = mouse.y;
 
 	//console.log("cow");
-  	cowEmitter.start(false, 2000, 10, 10);// 폭발(t/f), 수명(ms), 주기(ms), 갯수
-  	cowEmitter.gravity=1000;//중력 조절
+  	snowEmitter.start(false, 2000, 10, 10);// 폭발(t/f), 수명(ms), 주기(ms), 갯수
+  	snowEmitter.gravity=1000;//중력 조절
   
 }
 

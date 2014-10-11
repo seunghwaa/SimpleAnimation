@@ -11,13 +11,13 @@ var train;
 var house01;
 var crane;
 var sea;
-<<<<<<< HEAD
+
 var village01;
 var farm;
-=======
+
 var cowEmitter;
 
->>>>>>> origin/gh-pages
+
 
 function preload() {
 	game.load.spritesheet('cow', 'assets/cow.png', 100/*width*/,50/*height*/);
@@ -230,7 +230,7 @@ tractor클릭하면 움직이기
 	crane.animations.play('moving');
 
 
-<<<<<<< HEAD
+
 	
 	
 	village01 = game.add.sprite(2472,921, 'village01');
@@ -243,7 +243,7 @@ tractor클릭하면 움직이기
 	village01.inputEnabled = true;
 	village01.events.onInputDown.add(village01Click, this);
 	village01.animations.play('move_1');
-=======
+
 
 
 
@@ -260,7 +260,7 @@ tractor클릭하면 움직이기
 
 	
 
->>>>>>> origin/gh-pages
+
 }
 
 
@@ -340,7 +340,7 @@ function craneClick() {
 }
 
 
-<<<<<<< HEAD
+
 
 
 function village01Click() {
@@ -352,8 +352,8 @@ function village01Click() {
 
 
 
-=======
+
   
->>>>>>> origin/gh-pages
+
 
 

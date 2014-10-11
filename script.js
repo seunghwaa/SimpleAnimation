@@ -83,20 +83,20 @@ function create() {
 	*/
 
 
-	cow.animations.add('walk', [0, 1, 2, 1, 0]);
-    cow.animations.add('growl', [3, 4, 5, 6]);
+	// cow.animations.add('walk', [0, 1, 2, 1, 0]);
+ //    cow.animations.add('growl', [3, 4, 5, 6]);
 
-	 var cowClick = function() {
-        var clickComplete = function() {
-            cow.animations.play('growl', 5, true);
-        }
-        cow.animations.play('walk', 5, false).complete = clickComplete;
-    }
+	//  var cowClick = function() {
+ //        var clickComplete = function() {
+ //            cow.animations.play('growl', 5, true);
+ //        }
+ //        cow.animations.play('walk', 5, false).complete = clickComplete;
+ //    }
 
-    cow.inputEnabled = true;
-    cow.events.onInputDown.add(cowClick, this);
+ //    cow.inputEnabled = true;
+ //    cow.events.onInputDown.add(cowClick, this);
 
-    cow.animations.play('growl', 5, true);
+ //    cow.animations.play('growl', 5, true);
 	
 
 ////////////////////////////////////////////////////////
